@@ -9,6 +9,9 @@
 </head>
 
 <body>
+
+<div id="toast"></div>
+
 <div class="app">
 
   <!-- Sidebar -->
@@ -34,7 +37,9 @@
     <section class="content">
 
       <!-- Форма -->
-      <div class="form-container hidden" id="formContainer">
+      <div class="modal hidden" id="modal">
+<div class="modal-content">
+
         <form id="clientForm">
           <input type="text" id="name" placeholder="Имя" required />
           <input type="text" id="phone" placeholder="Телефон" required />
@@ -48,7 +53,7 @@
           <button type="submit">Сохранить</button>
         </form>
       </div>
-
+</div>
       <!-- Таблица -->
       <div class="table">
         <div class="table-header">
@@ -64,6 +69,13 @@
     </section>
 
   </main>
+</div>
+<button id="themeToggle">🌙</button>
+<div class="filters">
+  <button onclick="filterStatus('all')">Все</button>
+  <button onclick="filterStatus('new')">Новые</button>
+  <button onclick="filterStatus('progress')">В работе</button>
+  <button onclick="filterStatus('done')">Закрытые</button>
 </div>
 <script src="app.js"></script>
 </body>
