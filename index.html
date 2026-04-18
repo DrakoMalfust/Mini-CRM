@@ -1,18 +1,34 @@
-<h1>CRM система</h1>
+<!DOCTYPE html>
+<html lang="en">
 
-<form id="clientForm">
-  <input type="text" id="name" placeholder="Имя" required />
-  <input type="text" id="phone" placeholder="Телефон" required />
-  
-  <select id="status">
-    <option value="new">Новый</option>
-    <option value="progress">В работе</option>
-    <option value="done">Закрыт</option>
-  </select>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+</head>
 
-  <button type="submit">Добавить</button>
-</form>
+<body>
+  <h1>CRM система</h1>
 
-<input type="text" id="search" placeholder="Поиск..." />
+  <form id="clientForm">
+    <input type="text" id="name" placeholder="Имя" required />
+    <input type="text" id="phone" placeholder="Телефон" required />
 
-<ul id="clientList"></ul>
+    <select id="status">
+      <option value="new">Новый</option>
+      <option value="progress">В работе</option>
+      <option value="done">Закрыт</option>
+    </select>
+
+    <button type="submit">Добавить</button>
+  </form>
+
+  <input type="text" id="search" placeholder="Поиск..." />
+
+  <ul id="clientList"></ul>
+  <script src="=app.js"></script>
+</body>
+
+
+</html>

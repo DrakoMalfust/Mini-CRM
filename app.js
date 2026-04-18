@@ -1,4 +1,4 @@
-
+console.log('JS работает')
 let clients = JSON.parse(localStorage.getItem('clients')) || [];
 
 
