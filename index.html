@@ -1,60 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>CRM</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div id="toast"></div>
-
 <div class="app">
 
-  <!-- Sidebar -->
+  <!-- 🔹 SIDEBAR -->
   <aside class="sidebar">
     <h2>CRM</h2>
-    <nav>
-      <button>Клиенты</button>
-      <button>Заявки</button>
-      <button>Аналитика</button>
-    </nav>
+    <button onclick="filterStatus('all')">Все</button>
+    <button onclick="filterStatus('new')">Новые</button>
+    <button onclick="filterStatus('progress')">В работе</button>
+    <button onclick="filterStatus('done')">Закрытые</button>
   </aside>
 
-  <!-- Main -->
+  <!-- 🔹 MAIN -->
   <main class="main">
 
-    <!-- Header -->
+    <!-- 🔹 HEADER -->
     <header class="header">
       <input type="text" id="search" placeholder="Поиск..." />
-      <button id="addBtn">+ Добавить клиента</button>
+      <div>
+        <button id="themeToggle">🌙</button>
+        <button id="addBtn">+ Добавить</button>
+      </div>
     </header>
 
-    <!-- Content -->
+    <!-- 🔹 CONTENT -->
     <section class="content">
 
-      <!-- Форма -->
-      <div class="modal hidden" id="modal">
-<div class="modal-content">
-
-        <form id="clientForm">
-          <input type="text" id="name" placeholder="Имя" required />
-          <input type="text" id="phone" placeholder="Телефон" required />
-
-          <select id="status">
-            <option value="new">Новый</option>
-            <option value="progress">В работе</option>
-            <option value="done">Закрыт</option>
-          </select>
-
-          <button type="submit">Сохранить</button>
-        </form>
-      </div>
-</div>
-      <!-- Таблица -->
+      <!-- 🔹 TABLE -->
       <div class="table">
         <div class="table-header">
           <span>Имя</span>
@@ -70,15 +50,32 @@
 
   </main>
 </div>
-<button id="themeToggle">🌙</button>
-<div class="filters">
-  <button onclick="filterStatus('all')">Все</button>
-  <button onclick="filterStatus('new')">Новые</button>
-  <button onclick="filterStatus('progress')">В работе</button>
-  <button onclick="filterStatus('done')">Закрытые</button>
+
+<!-- 🔹 MODAL -->
+<div id="modal" class="modal hidden">
+  <div class="modal-content">
+
+    <form id="clientForm">
+      <h3>Клиент</h3>
+
+      <input type="text" id="name" placeholder="Имя" required />
+      <input type="text" id="phone" placeholder="Телефон" required />
+
+      <select id="status">
+        <option value="new">Новый</option>
+        <option value="progress">В работе</option>
+        <option value="done">Закрыт</option>
+      </select>
+
+      <button type="submit">Сохранить</button>
+    </form>
+
+  </div>
 </div>
+
+<!-- 🔹 TOAST -->
+<div id="toast"></div>
+
 <script src="app.js"></script>
 </body>
-
-
 </html>

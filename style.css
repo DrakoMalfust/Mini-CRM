@@ -1,14 +1,28 @@
+/* ==============================
+   🎨 ТЕМЫ
+============================== */
 :root {
   --bg: #f7f8fc;
   --card: #ffffff;
   --text: #111;
   --accent: #4f46e5;
+  --border: #e5e7eb;
 }
 
 .dark {
   --bg: #0f172a;
   --card: #1e293b;
   --text: #f1f5f9;
+  --border: #334155;
+}
+
+/* ==============================
+   🧱 БАЗА
+============================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  font-family: Arial;
 }
 
 body {
@@ -17,91 +31,101 @@ body {
   transition: 0.3s;
 }
 
-.table-row {
-  background: var(--card);
-  border-radius: 10px;
-  margin-bottom: 10px;
-}
-
-#toast {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #111;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 10px;
-  opacity: 0;
-  transition: 0.3s;
-}
-#toast.show {
-  opacity: 1;
-}
-
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  font-family: Arial;
-}
-
+/* ==============================
+   📦 LAYOUT
+============================== */
 .app {
   display: flex;
   height: 100vh;
 }
 
-/* Sidebar */
+/* ==============================
+   📚 SIDEBAR
+============================== */
 .sidebar {
   width: 220px;
-  background: #111;
-  color: white;
+  background: var(--card);
+  border-right: 1px solid var(--border);
   padding: 20px;
 }
 
-.sidebar button {
-  display: block;
-  width: 100%;
-  margin: 10px 0;
-  padding: 10px;
-  background: #222;
-  color: white;
-  border: none;
-  cursor: pointer;
+.sidebar h2 {
+  margin-bottom: 20px;
 }
 
-/* Main */
+.sidebar button {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+}
+
+.sidebar button:hover {
+  background: var(--bg);
+}
+
+/* ==============================
+   🖥 MAIN
+============================== */
 .main {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-/* Header */
+/* ==============================
+   🔝 HEADER
+============================== */
 .header {
   display: flex;
   justify-content: space-between;
   padding: 15px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid var(--border);
 }
 
-/* Content */
+.header input {
+  padding: 8px;
+  width: 200px;
+}
+
+/* ==============================
+   📄 CONTENT
+============================== */
 .content {
   padding: 20px;
 }
 
-/* Table */
-.table-header, .table-row {
+/* ==============================
+   📊 TABLE
+============================== */
+.table-header {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 120px;
   padding: 10px;
-  border-bottom: 1px solid #eee;
+  font-weight: bold;
+}
+
+.table-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 120px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background: var(--card);
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  align-items: center;
 }
 
 .table-row:hover {
-  background: #f5f5f5;
+  transform: scale(1.01);
 }
 
-/* Status */
+/* ==============================
+   🟢 STATUS
+============================== */
 .status {
   padding: 5px 10px;
   border-radius: 10px;
@@ -109,20 +133,13 @@ body {
   font-size: 12px;
 }
 
-.new { background: red; }
-.progress { background: orange; }
-.done { background: green; }
+.new { background: #ef4444; }
+.progress { background: #f59e0b; }
+.done { background: #22c55e; }
 
-/* Form */
-.form-container {
-  margin-bottom: 20px;
-}
-
-.hidden {
-  display: none;
-}
-
-
+/* ==============================
+   🪟 MODAL
+============================== */
 .modal {
   position: fixed;
   top: 0;
@@ -133,9 +150,47 @@ body {
 }
 
 .modal-content {
-  background: white;
+  background: var(--card);
+  color: var(--text);
   padding: 20px;
   margin: 100px auto;
   width: 300px;
   border-radius: 10px;
+}
+
+/* ==============================
+   💬 TOAST
+============================== */
+#toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--accent);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  opacity: 0;
+  transition: 0.3s;
+}
+
+#toast.show {
+  opacity: 1;
+}
+
+/* ==============================
+   🔘 КНОПКИ
+============================== */
+button {
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+/* ==============================
+   👻 UTILS
+============================== */
+.hidden {
+  display: none;
 }
