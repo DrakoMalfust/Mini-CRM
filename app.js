@@ -23,6 +23,13 @@ document.getElementById('clientForm').addEventListener('submit', function(e) {
   this.reset();
 });
 
+const addBtn = document.getElementById('addBtn');
+const formContainer = document.getElementById('formContainer');
+
+addBtn.addEventListener('click', () => {
+  formContainer.classList.toggle('hidden');
+});
+
 function saveToStorage() {
   localStorage.setItem('clients', JSON.stringify(clients));
 }
@@ -32,18 +39,21 @@ function renderClients(filtered = clients) {
   list.innerHTML = '';
 
   filtered.forEach(client => {
-    const li = document.createElement('li');
+    const row = document.createElement('div');
+    row.className = 'table-row';
 
-    li.innerHTML = `
-      <strong>${client.name}</strong> (${client.phone})<br>
-      Статус: ${client.status}
-      <button onclick="deleteClient(${client.id})">Удалить</button>
+    row.innerHTML = `
+      <span>${client.name}</span>
+      <span>${client.phone}</span>
+      <span><span class="status ${client.status}">${client.status}</span></span>
+      <span>
+        <button onclick="deleteClient(${client.id})">❌</button>
+      </span>
     `;
 
-    list.appendChild(li);
+    list.appendChild(row);
   });
 }
-
 
 
 function deleteClient(id) {

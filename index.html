@@ -9,25 +9,63 @@
 </head>
 
 <body>
-  <h1>CRM система</h1>
+<div class="app">
 
-  <form id="clientForm">
-    <input type="text" id="name" placeholder="Имя" required />
-    <input type="text" id="phone" placeholder="Телефон" required />
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2>CRM</h2>
+    <nav>
+      <button>Клиенты</button>
+      <button>Заявки</button>
+      <button>Аналитика</button>
+    </nav>
+  </aside>
 
-    <select id="status">
-      <option value="new">Новый</option>
-      <option value="progress">В работе</option>
-      <option value="done">Закрыт</option>
-    </select>
+  <!-- Main -->
+  <main class="main">
 
-    <button type="submit">Добавить</button>
-  </form>
+    <!-- Header -->
+    <header class="header">
+      <input type="text" id="search" placeholder="Поиск..." />
+      <button id="addBtn">+ Добавить клиента</button>
+    </header>
 
-  <input type="text" id="search" placeholder="Поиск..." />
+    <!-- Content -->
+    <section class="content">
 
-  <ul id="clientList"></ul>
-  <script src="app.js"></script>
+      <!-- Форма -->
+      <div class="form-container hidden" id="formContainer">
+        <form id="clientForm">
+          <input type="text" id="name" placeholder="Имя" required />
+          <input type="text" id="phone" placeholder="Телефон" required />
+
+          <select id="status">
+            <option value="new">Новый</option>
+            <option value="progress">В работе</option>
+            <option value="done">Закрыт</option>
+          </select>
+
+          <button type="submit">Сохранить</button>
+        </form>
+      </div>
+
+      <!-- Таблица -->
+      <div class="table">
+        <div class="table-header">
+          <span>Имя</span>
+          <span>Телефон</span>
+          <span>Статус</span>
+          <span>Действия</span>
+        </div>
+
+        <div id="clientList"></div>
+      </div>
+
+    </section>
+
+  </main>
+</div>
+<script src="app.js"></script>
 </body>
 
 
