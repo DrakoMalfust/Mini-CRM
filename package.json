@@ -1,5 +1,26 @@
 {
   "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
     "node-localstorage": "^3.0.5"
-  }
+  },
+  "name": "crm-project",
+  "version": "1.0.0",
+  "description": "Простая CRM система для учета клиентов",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DrakoMalfust/Mini-CRM.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/DrakoMalfust/Mini-CRM/issues"
+  },
+  "homepage": "https://github.com/DrakoMalfust/Mini-CRM#readme"
 }

@@ -1,11 +1,11 @@
 // ==============================
-// 📦 ХРАНИЛИЩЕ
+// 📦 ДАННЫЕ
 // ==============================
-let clients = JSON.parse(localStorage.getItem('clients')) || [];
+let clients = [];
 let editId = null;
 
 // ==============================
-// 🎯 DOM ЭЛЕМЕНТЫ
+// 🎯 DOM
 // ==============================
 const list = document.getElementById('clientList');
 const form = document.getElementById('clientForm');
@@ -13,6 +13,11 @@ const modal = document.getElementById('modal');
 const addBtn = document.getElementById('addBtn');
 const search = document.getElementById('search');
 const themeToggle = document.getElementById('themeToggle');
+
+// ==============================
+// 🌐 API URL
+// ==============================
+const API = 'http://localhost:3000/clients';
 
 // ==============================
 // 🌓 ТЁМНАЯ ТЕМА
@@ -28,18 +33,17 @@ addBtn.onclick = () => {
   modal.classList.remove('hidden');
 };
 
-// Закрытие по клику вне окна
 modal.onclick = (e) => {
-  if (e.target === modal) {
-    modal.classList.add('hidden');
-  }
+  if (e.target === modal) modal.classList.add('hidden');
 };
 
 // ==============================
-// 💾 СОХРАНЕНИЕ
+// 📥 ПОЛУЧИТЬ ДАННЫЕ (GET)
 // ==============================
-function save() {
-  localStorage.setItem('clients', JSON.stringify(clients));
+async function loadClients() {
+  const res = await fetch(API);
+  clients = await res.json();
+  render();
 }
 
 // ==============================
@@ -52,16 +56,6 @@ function render(data = clients) {
     const row = document.createElement('div');
     row.className = 'table-row';
     row.draggable = true;
-
-    // DRAG START
-    row.addEventListener('dragstart', () => {
-      row.classList.add('dragging');
-    });
-
-    // DRAG END
-    row.addEventListener('dragend', () => {
-      row.classList.remove('dragging');
-    });
 
     row.innerHTML = `
       <span>${client.name}</span>
@@ -78,9 +72,9 @@ function render(data = clients) {
 }
 
 // ==============================
-// ➕ ДОБАВЛЕНИЕ / РЕДАКТИРОВАНИЕ
+// ➕ ДОБАВИТЬ / ✏️ РЕДАКТИРОВАТЬ
 // ==============================
-form.addEventListener('submit', function(e) {
+form.addEventListener('submit', async function(e) {
   e.preventDefault();
 
   const name = document.getElementById('name').value;
@@ -88,26 +82,30 @@ form.addEventListener('submit', function(e) {
   const status = document.getElementById('status').value;
 
   if (editId) {
-    clients = clients.map(c =>
-      c.id === editId ? { ...c, name, phone, status } : c
-    );
-    showToast("Клиент обновлён");
+    // PUT
+    await fetch(`${API}/${editId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, phone, status })
+    });
+
+    showToast("Обновлено");
     editId = null;
   } else {
-    clients.push({
-      id: Date.now(),
-      name,
-      phone,
-      status
+    // POST
+    await fetch(API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, phone, status })
     });
-    showToast("Клиент добавлен");
+
+    showToast("Добавлено");
   }
 
-  save();
-  render();
-
-  modal.classList.add('hidden');
   form.reset();
+  modal.classList.add('hidden');
+
+  loadClients();
 });
 
 // ==============================
@@ -127,11 +125,13 @@ function editClient(id) {
 // ==============================
 // ❌ УДАЛЕНИЕ
 // ==============================
-function deleteClient(id) {
-  clients = clients.filter(c => c.id !== id);
-  save();
-  render();
+async function deleteClient(id) {
+  await fetch(`${API}/${id}`, {
+    method: 'DELETE'
+  });
+
   showToast("Удалено");
+  loadClients();
 }
 
 // ==============================
@@ -158,16 +158,6 @@ function filterStatus(status) {
 }
 
 // ==============================
-// 🧲 DRAG & DROP
-// ==============================
-list.addEventListener('dragover', e => {
-  e.preventDefault();
-
-  const dragging = document.querySelector('.dragging');
-  if (dragging) list.appendChild(dragging);
-});
-
-// ==============================
 // 💬 TOAST
 // ==============================
 function showToast(text) {
@@ -183,4 +173,4 @@ function showToast(text) {
 // ==============================
 // 🚀 СТАРТ
 // ==============================
-render();
+loadClients();
